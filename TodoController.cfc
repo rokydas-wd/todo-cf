@@ -6,7 +6,7 @@
           <!--- Query the MariaDB database --->
           <cfquery name="qTodos" datasource="todo_app">
               SELECT id, title, status
-              FROM `Todos`;
+              FROM `todos`;
           </cfquery>
           
           <!--- Loop through query results and build an array --->
@@ -34,7 +34,7 @@
       <cfset var todos = []>
       <cfquery name="qTodos" datasource="todo_app">
         SELECT id, title, status
-        FROM `Todos`
+        FROM `todos`
         WHERE id = <cfqueryparam value="#taskId#" cfsqltype="CF_SQL_VARCHAR">
       </cfquery>
     
@@ -56,7 +56,7 @@
       <cfargument name="newTitle" type="string" required="true">
       
       <cfquery datasource="todo_app">
-        UPDATE Todos
+        UPDATE todos
         SET title = <cfqueryparam value="#newTitle#" cfsqltype="CF_SQL_VARCHAR">
         WHERE id = <cfqueryparam value="#taskId#" cfsqltype="CF_SQL_VARCHAR">
       </cfquery>
@@ -99,7 +99,7 @@
       <cfset currentTimestamp = DateFormat(now(), "yyyy-mm-dd") & " " & TimeFormat(now(), "HH:mm:ss")>
 
       <cfquery datasource="todo_app">
-        INSERT INTO Todos (id, title, status)
+        INSERT INTO todos (id, title, status)
         VALUES (
             <cfqueryparam value="#currentTimestamp#" cfsqltype="CF_SQL_VARCHAR">,
             <cfqueryparam value="#todoTitle#" cfsqltype="CF_SQL_VARCHAR">,
@@ -114,7 +114,7 @@
       <cfargument name="taskId" type="string" required="true">
       
       <cfquery datasource="todo_app">
-        DELETE FROM Todos
+        DELETE FROM todos
         WHERE id = <cfqueryparam value="#taskId#" cfsqltype="CF_SQL_VARCHAR">
       </cfquery>
       <cfreturn true>
@@ -126,7 +126,7 @@
       <cfargument name="newStatus" type="string" required="true">
       
       <cfquery datasource="todo_app">
-        UPDATE Todos
+        UPDATE todos
         SET status = <cfqueryparam value="#newStatus#" cfsqltype="CF_SQL_VARCHAR">
         WHERE id = <cfqueryparam value="#taskId#" cfsqltype="CF_SQL_VARCHAR">
       </cfquery>
