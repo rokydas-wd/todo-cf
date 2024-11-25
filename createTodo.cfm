@@ -1,18 +1,10 @@
-<cfset todosService = createObject("component", "getTodos")>
+<cfset todosService = createObject("component", "TodoController")>
 
 <!--- Fetch tasks from the JSON file --->
 <cfset tasks = todosService.getTodos()>
 
 <cfif structKeyExists(form, "todoTitle")>
-    <cfset currentTimestamp = now()>
-    <cfset newTodo = structNew()>
-    <cfset newTodo.task = form.todoTitle>
-    <cfset newTodo.status = "Pending">
-    <cfset newTodo.id = currentTimestamp>
-    
-    <cfset arrayAppend(tasks, newTodo)>
-
-    <cfset fileWrite("todos.json", serializeJSON(tasks))>
+    <cfset todosService.createTodo(form.todoTitle) >
     <cflocation url="index.cfm" addtoken="false">
 </cfif>
 

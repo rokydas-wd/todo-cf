@@ -1,4 +1,4 @@
-<cfset todosService = createObject("component", "getTodos")>
+<cfset todosService = createObject("component", "TodoController")>
 
 <cfset taskId = form.taskId>
 
@@ -26,7 +26,7 @@
                         class="form-control" 
                         id="newTitle" 
                         name="newTitle"
-                        value="<cfoutput>#htmlEditFormat(task.task)#</cfoutput>"
+                        value="<cfoutput>#htmlEditFormat(task.title)#</cfoutput>"
                         placeholder="Enter todo title" 
                         required
                     >

@@ -30,13 +30,5 @@
       <cfreturn tasks>
     </cffunction>
   
-    <!--- Function to update tasks in the JSON file --->
-    <cffunction name="updateTasks" returntype="void" access="public">
-      <cfargument name="tasks" type="array" required="true">
-      
-      <!--- Save the updated tasks back to the JSON file --->
-      <cfset fileWrite(this.taskFilePath, serializeJSON(arguments.tasks))>
-    </cffunction>
-  
   </cfcomponent>
   

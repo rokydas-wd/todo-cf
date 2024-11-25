@@ -1,4 +1,4 @@
-<cfset todosService = createObject("component", "getTodos")>
+<cfset todosService = createObject("component", "TodoController")>
 
 <cfset taskId = form.taskId>
 <cfset newStatus = "" />
@@ -8,17 +8,17 @@
 <cfelseif form.taskStatus EQ "In Progress">
     <cfset newStatus = "Completed">
 <cfelseif form.taskStatus EQ "Completed">
-    <cfset newStatus = "DELETE">
-</cfif>
-
-<!--- <cfoutput>#taskId#</cfoutput>
-<cfoutput>#form.taskStatus#</cfoutput> --->
+    <cfset newStatus = "DELETE"> 
+</cfif> 
 
 <!--- Updating the task status --->
-<cfset todosService.updateTaskStatus(taskId, newStatus)>
+
+<cfif newStatus EQ "DELETE">
+    <cfset todosService.deleteTodo(taskId)>
+<cfelse>
+    <cfset todosService.updateTodoStatus(taskId, newStatus)>
+</cfif>
 
 <!--- Redirecting to home page --->
-
-
 
 <cflocation url="index.cfm" addtoken="false">

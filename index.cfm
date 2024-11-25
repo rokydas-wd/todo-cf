@@ -1,7 +1,7 @@
-<cfset todosService = createObject("component", "getTodos")>
+<cfset todosService = createObject("component", "TodoController")>
 
-<!--- Fetch tasks from the JSON file --->
-<cfset tasks = todosService.getTodos()>
+<!--- Fetch todos from the JSON file --->
+<cfset todos = todosService.getTodos()>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -30,16 +30,16 @@
 	</div>
 	
     <div class="row justify-content-center">
-      <!--- Loop through tasks and display them --->
-      <cfloop array="#tasks#" index="task">
+      <!--- Loop through todos and display them --->
+      <cfloop array="#todos#" index="task">
         <div class="col-md-4">
           <div class="card text-center" id="todo#task.id#" style="background-color: 
             <cfif task.status EQ 'Pending'>#f8d7da#<cfelseif task.status EQ 'In Progress'>#fff3cd#<cfelse>#d4edda#</cfif>;">
             <div class="card-body">
 				<cfif task.status EQ "Completed">
-					<s><h5 class="card-title"><cfoutput>#task.task#</cfoutput></h5></s>
+					<s><h5 class="card-title"><cfoutput>#task.title#</cfoutput></h5></s>
 					<cfelse>
-						<h5 class="card-title"><cfoutput>#task.task#</cfoutput></h5>
+						<h5 class="card-title"><cfoutput>#task.title#</cfoutput></h5>
 				</cfif>
             	
             	<p class="card-text">Status: <cfoutput>#task.status#</cfoutput></p>
@@ -60,7 +60,7 @@
 						<input type="hidden" name="taskId" value="#task.id#">
 					</cfoutput>
 					<button type="submit" class="btn btn-primary">
-						Update Task
+						Update Todo
 					</button>	
             	</form>
             </div>
